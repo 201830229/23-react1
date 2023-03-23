@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# 장호성
+## 3주차 230316
+## 개발 환경 설정
+Chocolatey  
+윈도우 소프트웨어를 위한 패키지 관리자  
+버전 관리에 용이하다  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Node.js와 VScode 설치  
+설치 후 > node --version으로 빠른 확인가능
+<br><br>
 
-## Available Scripts
+## 리액트란
+리액트 공식 웹사이트에서는 사용자 <인터페이스를 만들기 위한 JavaScript 라이브러리>라고 정의한다  
+여기서 라이브러리란  
+자주 사용되는 기능(함수등)을 정리해 모아 놓은 것이다 ex)C의 printf
 
-In the project directory, you can run:
+-리액트 개념  
+리액트는 복잡한 사이트를 쉽고 빠르게 만들고 관리해준다  
+SPA를 쉽고빠르게 만들수 있도록 해주는 도구이다  
+SPA - 하나의 페이지만 존재하는 웹사이트를 의미
+<br><br>
 
-### `npm start`
+## 리액트의 장점
+-빠른 업데이트와 렌더링 속도  
+동기식  
+클라이언트가 서버에 요청시 전체 페이지를 보내주는 것  
+비동기식  
+요청시 필요한 한 부분만 보내주는 것
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+DOM  
+각 항목을 계층구조로 표현하여 생성한 것  
+Virtual DOM  
+DOM의 조작이 비효율적이라 속도가 느려 고안된 방법  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+DOM은 동기식, Virtual DOM은 비동기식으로 리액트는 Virtual DOM을 사용
+<br><br>
 
-### `npm test`
+-컴포넌트 기반 구조  
+컴포넌트  
+페이지에서 하나의 구역을 의미  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+리액트의 모든 페이지는 컨포넌트로 구성되어 있다  
+하나의 컴포넌트는 다른 여러개의 컴포넌트의 조합으로 구성되 있으며  
+하나의 구성(컴포넌트)를 만들어 놓고 레고 블럭 조립하듯 재사용이 가능하다  
+그래서 재사용성이 뛰어나다
+<br><br>
 
-### `npm run build`
+-재사용성  
+반복작업을 줄여 생산성을 높여준다  
+유지보수가 용이하다  
+재사용이 가능 할려면 해당 모듈의 의존성이 없어야 한다  
+의존성이 낮다면 각 부분들은 잘 분리되어 있고 각 부분들의 문제점(버그등)을 찾아 수정하기 쉽다
+<br><br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-든든한 지원군  
+메타(구 페이스북)에서 오픈소스 프로젝트로 관리하고 있어서 계속 발전하고 있다
+<br><br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-활발한 지식 공유 & 커뮤니티  
+다양하고 활성화 된 커뮤니티에서 내가 모르는 점들이나 정보등을 얻기가 쉽다
+<br><br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-모바일 앱 개발 가능  
+리액트 네이티브라는 모바일 환경 프레임워크를 사용하면 크로스 플렛폼 앱을 개발 가능하다
+<br><br>
 
-### `npm run eject`
+## 리액트 단점
+-방대한 학습량  
+기존과는 다른 방식의 UI 라이브러리이기 떄문에 배워야 할 것들이 많다  
+그렇지만 자바스크립트를 알면 도움이 되지만 몰라도 큰 상관은 없다
+<br><br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-높은 상태 관리 복잡도  
+성능 최적화를 위한 state 관리가 어려울 수 있다  
+복잡하고 어려운 외부 상태 관리 라이브러리
+<br><br>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## create-react-app
+처음부터 리액트가 적용된 프로젝트를 만드는 방법  
+VScode의 터미널에서 > create-react-app <프로젝트 이름>을 입력  
+다운로드가 끝나면 > cd <프로젝트 이름> > npm start 입력  
+리액트 로고창이 뜨면 성공!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+***
+- README 작성요령
+1. 이름(h1)
+2. 강의날짜(h2)
+3. 학습내용(필수-h2이하)
+4. 작성코드(선택)
+5. 최근 내용이 위에 오도록 작성
+6. 날짜별 구분이 잘가도록 작성
