@@ -4,13 +4,13 @@ import './index.css';
 //import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import LandingPage from './chapter_09/LandingPage';
+import SignUp from './chapter_11/SignUp';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LandingPage/>
+    <SignUp/>
   </React.StrictMode>
   );
 
