@@ -1,4 +1,173 @@
 # 장호성
+## 10주차 05/04
+## 리스트와 키란 무엇인가?
+리스트란 자바스크립트의 변수나 객체를 하나의 변수로 묶어놓은 것을 말한다  
+키는 각 객체나 아이템을 구분할 수 있는 고유한 값을 의미한다  
+배열과 키를 사용하여 반복되는 다수의 엘리먼트를 쉽게 렌더링할 수 있다
+<br><br>
+
+## 여러 개의 컴포넌트 렌더링하기
+같은 컴포넌트를 반복적으로 사용하기 위해 배열에 들어있는 엘리먼트를 map()함수를 이용하여 렌더링 한다  
+```js
+const doubled = numbers.map((number) => number * 2)
+```
+위 코드는 map()함수를 사용하여 numbers배열에 들어있는 각 숫자를 2를 곱한 값이 들어간 double라는  
+배열에 생성하는 코드이다  
+이처럼 map()함수는 배열의 첫 번째 아이템부터 순서대로 각 아이템에 어떠한 연산을 수행한  
+뒤에 최종 결과를 배열로 만들어서 리턴해준다  
+리스트의 이름은 보통 복수형(s)을 변수는 리스트의 단수형을 사용한다
+<br><br>
+
+## 기본적인 리스트 컴포넌트
+리스트 컴포넌트에 키를 사용하지 않으면 개발자 도구의 콘솔탭에 '리스트 아이템에는 무조건 키가 있어야 한다'는  
+경고문이 나온다
+<br><br>
+
+## 리스트의 키에 대해 알아보기
+키는 리스트에서 아이템을 구분하기 위한 고유한 문자열이다  
+키는 리스트에서 어떤 아이템이 변경, 추가 또는 제거되었는지 구별하기 위해 사용한다  
+리액트에서의 키는 같은 리스트에 있는 엘리먼트 사이에서만 고유한 값이면 된다
+
+-키값을 id를 사용하는 방식  
+id의 의미 자체가 고유한 값이라는 것이기 때문에 키값으로 사용하기에 적합하다  
+
+-키값으로 인덱스를 사용하는 방법  
+```js
+const todoItems = todos.map((todo, index) => 
+        //아이템들의 고유한 ID가 없을 경우에만 사용해야 함
+        <li key={index}>
+            {todo.text}
+        </li>
+)
+```
+인덱스 값도 고유한 값이기 때문에 키값으로 사용해도 되지만,  
+배열에서 아이템의 순서가 바뀔 수 있는 경우에는 키값으로 인덱스를 사용하는 것을 권장하지 않는다  
+리액트에서는 키를 명시적으로 넣어 주지 않으면 기본적으로 이 인뎃스 값을 키값으로 사용한다  
+
+키는 명시적으로 넣어주는 것이 좋다
+<br><br>
+
+## 폼이란 무엇인가?
+폼은 사용자로부터 입력을 받기 위해 사용하는 것이다  
+
+-HTML과 리액트 폼의 차이  
+HTML은 엘리먼트 내부에 각각의 state가 존재한다  
+리액트는 컴포넌트 내부에서 state를 통해 데이터를 관리한다
+<br><br>
+
+## 제어 컴포넌트
+제어 컴포넌트는 사용자가 입력한 값에 접근하고 제어할 수 있도록 해주는 컴포넌트이다  
+
+-예시-
+```js
+function NameForm(props) {
+    const [value, setValue] = useState('')
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+
+    const handleSubmit = (event) => {
+        alert('입력한 이름: ' + value)
+        event.preventDefault()
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                이름:
+                <input type="text" value={value} onChange={handleChange}/>
+            </label>
+            <button type="submit">제출</button>
+        </form>
+    )
+}
+```
+handleChange 함수에서는 setValue()함수를 사용하여 새롭게 변경된 값을 value라는 이름의 state에 저장한다  
+event.target은 현재 발생한 이벤트의 타겟을 의미하며, event.target.value는 해당 타겟의 value 속성값을 의미한다
+<br><br>
+
+## textarea 태그
+state를 통해 태그에 value라는 attribute를 사용하여 텍스트를 표시한다
+
+-예시-
+```js
+function RequestForm(props) {
+    const [value, setValue] = useState('요청사항을 입력하세요.')
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+
+    const handleSubmit = (event) => {
+        alert('입력한 요청사항: ' + value)
+        event.preventDefault()
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                요청사항:
+                <textarea value={value} onChange={handleChange}/>
+            </label>
+            <button type="submit">제출</button>
+        </form>
+    )
+}
+```
+state로는 value가 있고, 이 값을 textarea태그의 value라는 attribute에 넣어줌으로써 화면에 나타나게 된다
+<br><br>
+
+## select 태그
+select태그도 textarea태그와 동일하다
+
+-예시-
+```js
+function FruiSelect(props) {
+    const [value, setValue] = useState('grape')
+
+    const handleChange = (event) => {
+        setValue(event.target.value)
+    }
+
+    const handleSubmit = (event) => {
+        alert('선택한 괴일: ' + value)
+        event.preventDefault()
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <label>
+                과일을 선택하세요:
+                <select value={value} onChange={handleChange}>
+                    <option value="apple">사과</option>
+                    <option value="banana">바나나</option>
+                    <option value="grape">포도</option>
+                    <option value="vatermelon">수박</option>
+                </select>
+            </label>
+            <button type="submit">제출</button>
+        </form>
+    )
+}
+```
+<br><br>
+
+## file input 태그
+```html
+<input type="file"/>
+```
+file input태그는 값이 읽기전용이기 때문에 리액트에서는 비제어 컴포넌트이다
+<br><br>
+
+## 여러 개의 입력 다루기
+여러 개의 state를 선언하여 각각의 입력에 대해 사용하면 된다
+<br><br>
+
+## Input Null Value
+제어 컴포넌트에 value prop을 정해진 값으로 넣으면 코드를 수정하지 않는 한 입력값을 바꿀 수 없다  
+만약 value prop은 넣되 자유롭게 입력할 수 있게 만들고 싶다면 값에 undefined 또는 null을 넣어 주면 된다
+***
 ## 9주차 04/27
 ## 이벤트 처리하기
 -DOM과 리액트의 차이   
