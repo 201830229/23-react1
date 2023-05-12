@@ -1,4 +1,103 @@
 # 장호성
+## 11주차 05/11
+## Shared State
+Shared State는 어떤 컴포넌트의 state에 있는 데이터를 여러 개의 하위 컴포넌트에서 공통적으로  
+사용하는 경우를 말한다  
+ex)부모 컴포넌트의 state에서 온도를 받아 자식 컴포넌트A에는 섭씨온도를 컴포넌트B에는 화씨온도를 표시
+<br><br>
+
+## 하위 컴포넌트에서 State 공유하기
+-Shared State 적용하기  
+state를 상위 컴포넌트로 올린다는 것을 'State 끌어올리기'라고 표현한다
+```html
+return (
+	...
+		<!-- 변경 전: <input value={temperature} onChange={handleChange} /> -->
+		<input value={props.temperature} onChange={handleChange} />
+	...
+)
+```
+이렇게 하면 온도 값을 컴포넌트의 state에서 가져오는 것이 아닌 props를 통해서 가져오게 된다
+
+또한 컴포넌트의 state를 사용하지 않게 되기 떄문에 입력값이 변경되었을 때 상위 컴포넌트로 변경된 값을  
+전달해 줘야 한다  
+이를 위해 handleChange() 함수를 변경한다
+```js
+const handleChang = (event) => {
+	// 변경 전: setTemperature(event.target.value);
+	props.onTemperatureChange(event.target.value);
+}
+```
+사용자가 온도 값을 변경할 때 마다 props에 있는 onTemperatureChange()함수를 통해 변경된 온도 값이  
+상위 컴포넌트로 전달된다  
+
+최종적으로 완성된 TemperatureInput 컴포넌트 모습
+```js
+function TemperatureInput(props){
+    const handleChange = (event) => {
+        props.onTemperatureChange(event.target.value)
+    }
+
+    return(
+        <fieldset>
+            <legend>
+                온도를 입력해주세요(단위:{scaleNames[props.scale]})
+            </legend>
+            <input value={props.temperature} onChange={handleChange}/>
+        </fieldset>
+    )
+}
+```
+오로지 상위 컴포넌트에서 전달받은 값만을 사용하고 있다  
+
+-Calculator 컴포넌트 변경하기
+변경된 TemperatureInput 컴포넌트에 맞춰서 Calculator 컴포넌트를 변경해 줘야 한다  
+변경된 Calculator 컴포넌트 모습
+```js
+function Calculator(props){
+    const [temperature, setTemperature] = useState("")
+    const [scale, setScale] = useState("c")
+
+    const handleCelsiusChange = (temperature) => {
+        setTemperature(temperature)
+        setScale("c")
+    }
+
+    const handleFahrenheitChange = (temperature) => {
+        setTemperature(temperature)
+        setScale("f")
+    }
+
+    const celsius = scale === "f" ? tryConvert(temperature, toCelsius) : temperature
+    const fahrenheit = scale === "c" ? tryConvert(temperature, toFahrenheit) : temperature
+
+    return(
+        <div>
+            <TemperatureInput
+                scale="c"
+                temperature={celsius}
+                onTemperatureChange={handleCelsiusChange}
+            />
+            <TemperatureInput
+                scale="f"
+                temperature={fahrenheit}
+                onTemperatureChange={handleFahrenheitChange}
+            />
+            <BoilingVerdict celsius={parseFloat(celsius)}/>
+        </div>
+    )
+}
+```
+state로 temperature와 scale을 선언하여 온도 값과 단위를 각각 저장한다  
+TemperatureInput 컴포넌트를 사용하는 부분에서는 각 단위로 변환된 온도 값과 단위를 props로 넣어 주었고,  
+값이 변경되었을 때 업데이트하기 위한 함수를 onTemperatureChange에 넣었다  
+따라서 섭씨온도가 변경되면 단위가 ' c '로 변경되고, 화씨온도가 변경되면 단위가 ' f '로 변경된다  
+
+상위 컴포넌트인 Calculator에서 온도 값과 단위를 각각의 state로 가지고 있으며, 두 개의 하위 컴포넌트는 각각  
+섭씨와 화씨로 변환된 온도 값과 단위 그리고 온도를 업데이트하기 위한 함수를 props로 갖고 있다  
+이처럼 각 컴포넌트가 state에 값을 갖고 있는 것이 아니라 공통된 상위 컴포넌트로 올려서 공유하는 방법을  
+사용하면 리액트에서 더욱 간결하고 효율적인 개발을 할 수 있다
+***
 ## 10주차 05/04
 ## 리스트와 키란 무엇인가?
 리스트란 자바스크립트의 변수나 객체를 하나의 변수로 묶어놓은 것을 말한다  
