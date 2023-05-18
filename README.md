@@ -23,7 +23,7 @@ children이 배열로 되어 있는것은 여러개의 하위 컴포넌트를 �
 여러 개의 children 집합이 필요한 경우에는 별도로 props를 정의해서 각각 원하는 컴포넌트를 넣어 주면 된다  
 
 -Specialization  
-Specialization은 전문화, 특수화라는 뜻을 가지고 있다
+Specialization은 전문화, 특수화라는 뜻을 가지고 있다  
 **-웰컴다이얼로그는 다이얼로그의 특별한 케이스이다-**  
 범용적인 개념을 구별이 되게 구체화하는 것을 Specialization이라고 한다  
 
